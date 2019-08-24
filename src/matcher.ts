@@ -1,4 +1,4 @@
-import * as equal from 'fast-deep-equal'
+const equal = require('fast-deep-equal/es6')
 
 export type MatcherClb<T> = (value: T) => any
 
