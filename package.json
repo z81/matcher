@@ -12,7 +12,7 @@
   "author": "z81 <muzo0@yandex.ru>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/z81/matcher"
   },
   "license": "MIT",
   "engines": {
@@ -31,7 +31,6 @@
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
-    "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once"
   },
   "lint-staged": {
@@ -119,5 +118,10 @@
   },
   "dependencies": {
     "fast-deep-equal": "^3.0.0-beta.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
