@@ -113,6 +113,14 @@ describe('tests', () => {
     expect(value({ a: '3' }, () => 0)[0]({ a: '2' })).toEqual(false)
   })
 
+  it('[1] is [1]', () => {
+    expect(value([1], () => 0)[0]([1])).toEqual(true)
+  })
+
+  it('[1] is not [1, 2]', () => {
+    expect(value([1], () => 0)[0]([1, 2])).toEqual(false)
+  })
+
   it('value new Date(10, 11, 12, 20, 23, 32) is new Date(10, 11, 12, 20, 23, 32)', () => {
     expect(
       value(new Date(10, 11, 12, 20, 23, 32), () => 0)[0](new Date(10, 11, 12, 20, 23, 32))

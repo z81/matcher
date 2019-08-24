@@ -1,15 +1,28 @@
 import * as equal from 'fast-deep-equal'
 
-console.log(equal)
-
 export type MatcherClb<T> = (value: T) => any
 
 export type Matcher<T> = [<V>(value: V | T) => boolean, MatcherClb<T>]
 
 export const value = <T>(value: T, clb: MatcherClb<T>): Matcher<T> => [
   val => {
-    if (typeof val === 'object' || val instanceof RegExp || val instanceof Date) {
-      return equal(val, value)
+    if (
+      typeof val === 'object' ||
+      val instanceof RegExp ||
+      val instanceof Date ||
+      val instanceof Int8Array ||
+      val instanceof Uint8Array ||
+      val instanceof Uint8ClampedArray ||
+      val instanceof Int16Array ||
+      val instanceof Uint16Array ||
+      val instanceof Int32Array ||
+      val instanceof Uint32Array ||
+      val instanceof Float32Array ||
+      val instanceof Float64Array ||
+      val instanceof BigInt64Array ||
+      val instanceof BigUint64Array
+    ) {
+      return val === value || equal(val, value)
     }
 
     return val === value
