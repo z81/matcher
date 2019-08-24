@@ -7,6 +7,7 @@ export type Matcher<T> = [<V>(value: V | T) => boolean, MatcherClb<T>]
 export const value = <T>(value: T, clb: MatcherClb<T>): Matcher<T> => [
   val => {
     if (
+      // tslint:disable-next-line: strict-type-predicates
       typeof val === 'object' ||
       val instanceof RegExp ||
       val instanceof Date ||
