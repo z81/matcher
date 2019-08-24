@@ -1,4 +1,6 @@
-import equal from 'fast-deep-equal'
+import * as equal from 'fast-deep-equal'
+
+console.log(equal)
 
 export type MatcherClb<T> = (value: T) => any
 
@@ -36,7 +38,7 @@ export const number = (clb: MatcherClb<number>) => type(0, clb)
 
 export const boolean = (clb: MatcherClb<boolean>) => type(false, clb)
 
-export const object = (clb: MatcherClb<object>) => type(Object, clb)
+export const object = (clb: MatcherClb<object>) => type(global, clb)
 
 export const array = (clb: MatcherClb<Array<any>>): Matcher<Array<any>> => [
   val => val instanceof Array,

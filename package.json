@@ -118,6 +118,6 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "fast-deep-equal": "^2.0.1"
+    "fast-deep-equal": "^3.0.0-beta.1"
   }
 }
