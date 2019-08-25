@@ -17,19 +17,19 @@ class Store {}
   v =>
     void console.info(`Match`, v) ||
     matchAll(v)(
-      value('str', v => console.log('Это строка str')),
-      value(7, v => console.log('Это число 7')),
-      value({ a: '2' }, v => console.log("Это {a: '2'}", v)),
-      value({ a: '3' }, v => console.log("Это {a: '3'}")),
-      value(null, v => console.log('Это null')),
-      value(false, v => console.log('Это false')),
-      type(0, () => console.log('Это число')),
-      string(() => console.log('Это строка')),
-      boolean(() => console.log('Это boolean')),
-      regexp(() => console.log('Это RegExp')),
-      nan(() => console.log('Это NaN')),
-      array(() => console.log('Это array')),
-      instance(Store, () => console.log('Это Store'))
+      value('str', v => console.log(`This is string "${v}"`)),
+      value(7, v => console.log('This is number 7')),
+      value({ a: '2' }, v => console.log("This is {a: '2'}", v)),
+      value({ a: '3' }, v => console.log("This is {a: '3'}")),
+      value(null, v => console.log('This is null')),
+      value(false, v => console.log('This is false')),
+      type(0, () => console.log('This is number')),
+      string(() => console.log('This is string')),
+      boolean(() => console.log('This is boolean')),
+      regexp(() => console.log('This is RegExp')),
+      nan(() => console.log('This is NaN')),
+      array(() => console.log('This is array')),
+      instance(Store, () => console.log('This is Store'))
     )
 )
 
