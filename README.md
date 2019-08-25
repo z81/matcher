@@ -8,7 +8,7 @@ npm install perfect-matcher
 
 # Features
 
-- [x] match by value (include deep equal with objects, Date, array, typed arrays)
+- [x] match by value (include deep compare with objects, Date, array, typed arrays)
 - [x] match by type
 - [x] match by instance
 - [x] match NaN, regexp, positive/negative number
