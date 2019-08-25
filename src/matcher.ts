@@ -1,6 +1,6 @@
 const equal = require('fast-deep-equal/es6')
 
-export type MatcherClb<T> = (value: T) => any
+type MatcherClb<T> = (value: T) => any
 
 export type Matcher<T> = [<V>(value: V | T) => boolean, MatcherClb<T>]
 
