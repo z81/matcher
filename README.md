@@ -47,7 +47,7 @@ console.log(
     tuple((firstName, lastName) => `${firstName} ${lastName}`),
     tuple(firstName => `${firstName}`)
   )
-  // firstName
+  // "firstName"
 )
 ```
 
