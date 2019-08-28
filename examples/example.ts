@@ -8,7 +8,8 @@ import {
   instance,
   array,
   match,
-  regexp
+  regexp,
+  tuple
 } from '../src/matcher'
 
 class Store {}
@@ -40,5 +41,13 @@ console.log(
     value('Str', () => '=Str'),
     value('Str2', () => '=Str2'),
     value(null, () => '=null')
+  )
+)
+
+console.log(
+  // prettier-ignore
+  matchAll(['firstName'] as [string, string?])(
+    tuple((firstName, lastName) => `${firstName} ${lastName}`),
+    tuple((firstName) => `${firstName}`)
   )
 )

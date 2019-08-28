@@ -12,7 +12,8 @@ import {
   regexp,
   nan,
   array,
-  instance
+  instance,
+  tuple
 } from '../src/matcher'
 
 describe('tests', () => {
@@ -134,17 +135,51 @@ describe('tests', () => {
   })
 
   it('matchAll', () => {
-    expect(matchAll(7)(value(7, () => '7'), value(9, () => '9'), number(() => 'number'))).toEqual([
+    // prettier-ignore
+    expect(matchAll(7)(
+      value(7, () => '7'),
+      value(9, () => '9'),
+      number(() => 'number')
+    )).toEqual([
       '7',
       'number'
     ])
   })
 
   it('match', () => {
-    expect(match(7)(value(7, () => '7'), value(9, () => '9'), number(() => 'number'))).toEqual('7')
+    // prettier-ignore
+    expect(match(7)(
+      value(7, () => '7'),
+      value(9, () => '9'),
+      number(() => 'number')
+    )).toEqual('7')
   })
 
   it('no matches', () => {
-    expect(match(1)(value(7, () => '7'), value(9, () => '9'))).toEqual(undefined)
+    // prettier-ignore
+    expect(match(1)(
+      value(7, () => '7'),
+      value(9, () => '9'))
+    ).toEqual(undefined)
+  })
+
+  it('tuple', () => {
+    // prettier-ignore
+    expect(
+      match(['firstName'] as [string, string?])(
+        tuple((firstName, lastName) => `${firstName} ${lastName}`),
+        tuple((firstName) => `${firstName}`)
+      )
+    ).toEqual('firstName')
+  })
+
+  it('tuple', () => {
+    // prettier-ignore
+    expect(
+      match(['firstName', 'lastName'] as [string, string?])(
+        tuple((firstName, lastName) => `${firstName} ${lastName}`),
+        tuple((firstName) => `${firstName}`)
+      )
+    ).toEqual('firstName lastName')
   })
 })

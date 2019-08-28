@@ -19,9 +19,7 @@ export const value = <T>(value: T, clb: MatcherClb<T>): Matcher<T> => [
       val instanceof Int32Array ||
       val instanceof Uint32Array ||
       val instanceof Float32Array ||
-      val instanceof Float64Array ||
-      val instanceof BigInt64Array ||
-      val instanceof BigUint64Array
+      val instanceof Float64Array
     ) {
       return val === value || equal(val, value)
     }
@@ -69,6 +67,18 @@ export const positive = (clb: MatcherClb<number>): Matcher<number> => [val => va
 export const negative = (clb: MatcherClb<number>): Matcher<number> => [val => val < 0, clb]
 
 export const any = <T>(clb: MatcherClb<T>): Matcher<T> => [() => true, clb]
+
+// export const not = <T, M extends <T>(clb: MatcherClb<T>) => Matcher<T>>(fun: M) => (
+//   ...args: Parameters<M>
+// ): Matcher<T> => {
+//   const [matcher, clb] = fun(...args)
+//   return [v => !matcher(v), clb]
+// }
+
+export const tuple = <T extends Array<any>>(clb: (...args: Partial<T>) => any): Matcher<T> => [
+  val => val instanceof Array && clb.length === val.length,
+  arr => clb(...arr)
+]
 
 export const matchAll = <T>(value: T) => (...matchers: Matcher<T>[]) =>
   matchers.filter(([match]) => match(value)).map(([_, callback]) => callback(value))

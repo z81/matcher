@@ -12,7 +12,8 @@ npm install perfect-matcher
 - [x] match by type
 - [x] match by instance
 - [x] match NaN, regexp, positive/negative number
-- [ ] optional matching arrays/objects
+- [x] match tuple
+- [ ] optional matching objects
 
 ## Docs
 
