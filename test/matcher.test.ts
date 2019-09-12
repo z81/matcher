@@ -182,4 +182,14 @@ describe('tests', () => {
       )
     ).toEqual('firstName lastName')
   })
+
+  it('tuple ', () => {
+    // prettier-ignore
+    expect(
+      match(['firstName', 'lastName'] as [string, string?])(
+        tuple((firstName, lastName) => `${firstName} ${lastName}`),
+        tuple((firstName) => `${firstName}`)
+      )
+    ).toEqual('firstName lastName')
+  })
 })
