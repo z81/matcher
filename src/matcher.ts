@@ -76,7 +76,7 @@ export const any = <T>(clb: MatcherClb<T>): Matcher<T> => [() => true, clb]
 // }
 
 export const tuple = <T extends Array<any>>(clb: (...args: Partial<T>) => any): Matcher<T> => [
-  val => val instanceof Array && clb.length === val.length,
+  val => Array.isArray(val) && clb.length <= val.length,
   arr => clb(...arr)
 ]
 
