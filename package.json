@@ -2,7 +2,7 @@
   "name": "perfect-matcher",
   "version": "0.0.0-development",
   "description": "",
-  "keywords": [],
+  "keywords": ["matching", "typescript", "pattern matching"],
   "main": "dist/matcher.umd.js",
   "module": "dist/matcher.es5.js",
   "typings": "dist/types/matcher.d.ts",
