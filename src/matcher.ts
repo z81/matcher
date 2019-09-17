@@ -79,8 +79,9 @@ export const tuple = <T extends Array<any>>(clb: (...args: Partial<T>) => any): 
   arr => clb(...arr)
 ]
 
-export const matchAll = <T>(value: T) => (...matchers: Matcher<T>[]) =>
-  matchers.filter(([match]) => match(value)).map(([_, callback]) => callback(value))
+export const matchAll = <T, F extends T extends Array<any> ? T : any>(value: T) => (
+  ...matchers: (Matcher<F>)[]
+) => matchers.filter(([match]) => match(value as F)).map(([_, callback]) => callback(value as F))
 
 export const match = <T>(value: T) => (...matchers: Matcher<any>[]) => {
   const [, clb = false] = matchers.find(([match]) => match(value)) || []
