@@ -2,12 +2,11 @@ const equal = require('fast-deep-equal/es6')
 
 type MatcherClb<T> = (value: T) => any
 
-export type Matcher<T> = [<V>(value: V | T) => boolean, MatcherClb<T>]
+export type Matcher<T> = [(value: T) => boolean, MatcherClb<T>]
 
 export const value = <T>(value: T, clb: MatcherClb<T>): Matcher<T> => [
-  val => {
+  (val: any): val is T => {
     if (
-      // tslint:disable-next-line: strict-type-predicates
       typeof val === 'object' ||
       val instanceof RegExp ||
       val instanceof Date ||
@@ -83,7 +82,7 @@ export const tuple = <T extends Array<any>>(clb: (...args: Partial<T>) => any): 
 export const matchAll = <T>(value: T) => (...matchers: Matcher<T>[]) =>
   matchers.filter(([match]) => match(value)).map(([_, callback]) => callback(value))
 
-export const match = <T>(value: T) => (...matchers: Matcher<T>[]) => {
+export const match = <T>(value: T) => (...matchers: Matcher<any>[]) => {
   const [, clb = false] = matchers.find(([match]) => match(value)) || []
   if (clb) {
     return clb(value)

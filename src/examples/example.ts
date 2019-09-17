@@ -10,11 +10,13 @@ import {
   match,
   regexp,
   tuple
-} from '../src/matcher'
+} from '../matcher'
 
-class Store {}
+class Store {
+  a = 2
+}
 
-;['str', 7, 'b', false, null, undefined, /regex/, NaN, [], { a: '2' }, new Store()].forEach(
+;['str', 7, 'b', false, /regex/, NaN, [], { a: '2' }, new Store()].forEach(
   v =>
     void console.info(`Match`, v) ||
     matchAll(v)(
