@@ -67,25 +67,21 @@ export const negative = (clb: MatcherClb<number>): Matcher<number> => [val => va
 
 export const any = <T>(clb: MatcherClb<T>): Matcher<T> => [() => true, clb]
 
-// export const not = <T, M extends <T>(clb: MatcherClb<T>) => Matcher<T>>(fun: M) => (
-//   ...args: Parameters<M>
-// ): Matcher<T> => {
-//   const [matcher, clb] = fun(...args)
-//   return [v => !matcher(v), clb]
-// }
+export const not = <T extends Matcher<any>>([matcher, clb]: T) => [v => !matcher(v), clb] as T
 
-export const tuple = <T extends Array<any>>(clb: (...args: Partial<T>) => any): Matcher<T> => [
-  val => Array.isArray(val) && clb.length <= val.length,
-  arr => clb(...arr)
-]
+export const tuple = <T extends Array<any>, F extends { [k in keyof T]: Exclude<T[k], undefined> }>(
+  clb: (...args: F) => any
+): Matcher<T> => [val => Array.isArray(val) && clb.length <= val.length, arr => clb(...(arr as F))]
 
 export const matchAll = <T, F extends T extends Array<any> ? T : any>(value: T) => (
   ...matchers: (Matcher<F>)[]
 ) => matchers.filter(([match]) => match(value as F)).map(([_, callback]) => callback(value as F))
 
-export const match = <T>(value: T) => (...matchers: Matcher<any>[]) => {
-  const [, clb = false] = matchers.find(([match]) => match(value)) || []
+export const match = <T, F extends T extends Array<any> ? T : any>(value: T) => (
+  ...matchers: (Matcher<F>)[]
+) => {
+  const [, clb = false] = matchers.find(([match]) => match(value as F)) || []
   if (clb) {
-    return clb(value)
+    return clb(value as F)
   }
 }

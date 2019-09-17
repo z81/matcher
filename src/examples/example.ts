@@ -9,7 +9,8 @@ import {
   array,
   match,
   regexp,
-  tuple
+  tuple,
+  not
 } from '../matcher'
 
 class Store {
@@ -48,8 +49,9 @@ console.log(
 
 console.log(
   // prettier-ignore
-  matchAll(['firstName'] as [string, string?])(
+  matchAll(['firstName'] as [string, string?]|number)(
     tuple((firstName, lastName) => `${firstName} ${lastName}`),
-    tuple((firstName) => `${firstName}`)
+    tuple((firstName) => `${firstName}`),
+    not(nan(() => console.log('This is NOT NaN'))),
   )
 )
