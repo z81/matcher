@@ -52,6 +52,6 @@ console.log(
   matchAll(['firstName'] as [string, string?]|number)(
     tuple((firstName, lastName) => `${firstName} ${lastName}`),
     tuple((firstName) => `${firstName}`),
-    not(nan(() => console.log('This is NOT NaN'))),
+    // not(nan(() => console.log('This is NOT NaN'))),
   )
 )
