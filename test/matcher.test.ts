@@ -13,7 +13,7 @@ import {
   nan,
   array,
   instance,
-  tuple
+  tuple,
 } from '../src/matcher'
 
 describe('tests', () => {
@@ -30,11 +30,11 @@ describe('tests', () => {
   })
 
   it('string is not number', () => {
-    expect(number(() => 0)[0]('5')).toEqual(false)
+    expect(number(() => 0)[0]('5' as any)).toEqual(false)
   })
 
   it('number is not number', () => {
-    expect(number(() => 0)[0]('5')).toEqual(false)
+    expect(number(() => 0)[0]('5' as any)).toEqual(false)
   })
   it('positive is positive', () => {
     expect(positive(() => 0)[0](7)).toEqual(true)
@@ -53,7 +53,7 @@ describe('tests', () => {
   })
 
   it('number is not string', () => {
-    expect(string(() => 0)[0](1)).toEqual(false)
+    expect(string(() => 0)[0](1 as any)).toEqual(false)
   })
 
   it('boolean is boolean', () => {
@@ -61,15 +61,15 @@ describe('tests', () => {
   })
 
   it('number is not boolean', () => {
-    expect(boolean(() => 0)[0](1)).toEqual(false)
+    expect(boolean(() => 0)[0](1 as any)).toEqual(false)
   })
 
   it('object is object', () => {
-    expect(object(() => 0)[0]({ a: '1' })).toEqual(true)
+    expect(object(() => 0)[0]({ a: '1' } as any)).toEqual(true)
   })
 
   it('number is not object', () => {
-    expect(object(() => 0)[0](1)).toEqual(false)
+    expect(object(() => 0)[0](1 as any)).toEqual(false)
   })
 
   it('regexp is regexp', () => {
@@ -77,7 +77,7 @@ describe('tests', () => {
   })
 
   it('number is not regexp', () => {
-    expect(regexp(() => 0)[0](1)).toEqual(false)
+    expect(regexp(() => 0)[0](1 as any)).toEqual(false)
   })
 
   it('array is array', () => {
@@ -85,7 +85,7 @@ describe('tests', () => {
   })
 
   it('number is not array', () => {
-    expect(array(() => 0)[0](1)).toEqual(false)
+    expect(array(() => 0)[0](1 as any)).toEqual(false)
   })
 
   it('number is any', () => {
@@ -103,7 +103,7 @@ describe('tests', () => {
 
   it('Store is not instanceof Array', () => {
     class Store {}
-    expect(instance(Array, () => 0)[0](new Store())).toEqual(false)
+    expect(instance(Array, () => 0)[0](new Store() as any)).toEqual(false)
   })
 
   it("{a: '2'} is {a: '2'}", () => {

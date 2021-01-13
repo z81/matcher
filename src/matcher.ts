@@ -33,18 +33,18 @@ export const type = <T>(value: T, clb: MatcherClb<T>): Matcher<T> => [
   clb,
 ]
 
-export const instance = <T extends Function>(value: T, clb: MatcherClb<T>): Matcher<T> => [
-  (val) => val instanceof value,
-  clb,
-]
+export const instance = <T extends new (...args: any) => any>(
+  value: T,
+  clb: MatcherClb<T>
+): Matcher<InstanceType<T>> => [(val) => (val as any) instanceof value, clb]
 
 export const nan = (clb: MatcherClb<number>): Matcher<number> => [(val) => Number.isNaN(val), clb]
 
-export const string = (clb: MatcherClb<string>) => type('', clb)
+export const string = (clb: MatcherClb<string>) => type('' as string, clb)
 
-export const number = (clb: MatcherClb<number>) => type(0, clb)
+export const number = (clb: MatcherClb<number>) => type(0 as number, clb)
 
-export const boolean = (clb: MatcherClb<boolean>) => type(false, clb)
+export const boolean = (clb: MatcherClb<boolean>) => type(false as boolean, clb)
 
 export const object = (clb: MatcherClb<object>) => type(global, clb)
 
