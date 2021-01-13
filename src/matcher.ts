@@ -38,11 +38,7 @@ export const instance = <T extends Function>(value: T, clb: MatcherClb<T>): Matc
   clb,
 ]
 
-export const nan = (clb: MatcherClb<number>): Matcher<number> => [
-  // eslint-disable-line no-unnecessary-type-assertion
-  (val) => Number.isNaN(val as number),
-  clb,
-]
+export const nan = (clb: MatcherClb<number>): Matcher<number> => [(val) => Number.isNaN(val), clb]
 
 export const string = (clb: MatcherClb<string>) => type('', clb)
 
